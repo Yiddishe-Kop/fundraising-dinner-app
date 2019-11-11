@@ -13,6 +13,7 @@ body {
   @apply m-0 bg-gray-100 font-sans;
   & * {
     transition: all 0.3s ease-in;
+    box-sizing: border-box;
   }
 }
 
