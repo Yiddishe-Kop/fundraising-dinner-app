@@ -1,9 +1,23 @@
 <template>
   <main>
+    <div class="total-raised">
+      <div class="amount">₪{{$store.state.amountRaised}}</div>
+      <div class="total">of ₪{{$store.state.targetAmount}}</div>
+      <span class="percent">{{$store.getters.percentageRaised}}%</span>
+    </div>
     <div class="controls">
       <div class="card">
         <h2>Control Panel</h2>
         <div class="form">
+          <div class="row">
+            <label>Target Fundraising Amount (ILS)</label>
+            <input
+              type="number"
+              @change="e => $store.commit('updateTargetAmount', e.target.value)"
+              :value="$store.state.targetAmount"
+              style="width: 100px"
+            />
+          </div>
           <div class="row">
             <label>Number of chairs</label>
             <input
@@ -35,14 +49,11 @@
             <label>Add Donation</label>
             <input
               type="number"
-              @keyup.enter="e => addName(e.target.value)"
-              v-model="name"
+              @keyup.enter="e => addDonation(e.target.value)"
+              v-model="donation"
               placeholder="Amount"
             />
           </div>
-
-          <button @click="$store.commit('add')" class="control">+</button>
-          <button @click="$store.commit('remove')" class="control">-</button>
         </div>
       </div>
     </div>
@@ -54,19 +65,36 @@ export default {
   name: "Admin",
   data() {
     return {
-      name: ""
+      name: "",
+      donation: ""
     };
   },
   methods: {
     addName(name) {
       this.$store.commit("addName", name);
       this.name = "";
+    },
+    addDonation(num) {
+      this.$store.commit("addDonation", num);
+      this.donation = "";
     }
   }
 };
 </script>
 
 <style lang="scss">
+.total-raised {
+  @apply inline-block m-3 mx-auto px-6 py-3 rounded bg-gray-100 shadow;
+  .amount {
+    @apply text-4xl font-extrabold text-green-600;
+  }
+  .total {
+    @apply text-gray-600 text-right;
+  }
+  .percent {
+    @apply px-2 font-bold bg-green-200 text-green-700 rounded mt-2 inline-block;
+  }
+}
 .controls {
   padding: 8px;
   height: 100%;

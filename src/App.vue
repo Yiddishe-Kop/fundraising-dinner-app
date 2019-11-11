@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <banner :num="$store.state.numSponsored" :total="$store.state.numOfChairs" />
+    <banner :num="$store.getters.fullChairsSponsored" :total="$store.state.numOfChairs" />
     <router-view></router-view>
     <transition name="fade">
       <modal v-if="$store.state.showModal"></modal>
@@ -36,6 +36,6 @@ main {
 footer {
   background-color: var(--dark);
   padding: 8px;
-  min-height: 80px;
+  min-height: 40px;
 }
 </style>

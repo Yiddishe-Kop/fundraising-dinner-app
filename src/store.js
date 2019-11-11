@@ -6,6 +6,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    targetAmount: 350000,
+    amountRaised: 0,
     numOfChairs: 50,
     numSponsored: 7,
     names: [],
@@ -13,6 +15,12 @@ export default new Vuex.Store({
     showModal: false
   },
   mutations: {
+    updateTargetAmount(state, num) {
+      state.targetAmount = Number(num)
+    },
+    addDonation(state, num) {
+      state.amountRaised += Number(num)
+    },
     updateNumOfChairs(state, num) {
       state.numOfChairs = Number(num)
     },
@@ -22,16 +30,23 @@ export default new Vuex.Store({
     addName(state, name) {
       state.names = [...state.names, name]
     },
-    add(state) {
-      state.numSponsored < state.numOfChairs && state.numSponsored++
+    showModal(state) {
       state.showModal = true
-    },
-    remove(state) {
-      state.numSponsored > 0 && state.numSponsored--
     },
     closeModal(state) {
       state.showModal = false
     }
   },
-  plugins: [sharedMutations({ predicate: ['updateNumOfChairs', 'updatechairSize', 'addName', 'add', 'remove'] })],
+  getters: {
+    percentageRaised: state => {
+      return ((state.amountRaised / state.targetAmount) * 100).toFixed(3);
+    },
+    chairsSponsored: (state, getters) => {
+      return (getters.percentageRaised / 100) * state.numOfChairs;
+    },
+    fullChairsSponsored: (state, getters) => {
+      return Math.floor(getters.chairsSponsored)
+    }
+  },
+  plugins: [sharedMutations({ predicate: ['updateTargetAmount', 'addDonation', 'updateNumOfChairs', 'updatechairSize', 'addName', 'showModal'] })],
 });

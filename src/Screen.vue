@@ -4,7 +4,7 @@
     <grid :style="gridStyle">
       <chair
         v-for="chair in $store.state.numOfChairs"
-        :active="chair <= $store.state.numSponsored"
+        :active="chair <= $store.getters.chairsSponsored"
         :size="$store.state.chairSize"
         :key="chair"
       />
@@ -25,6 +25,15 @@ export default {
         width: ""
       }
     };
+  },
+  created() {
+    this.$store.watch(
+      (state, getters) => getters.fullChairsSponsored,
+      (newValue, oldValue) => {
+        console.log(`Updating from ${oldValue} to ${newValue}`);
+        this.$store.commit("showModal");
+      }
+    );
   },
   mounted() {
     setTimeout(() => {
