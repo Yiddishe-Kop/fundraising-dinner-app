@@ -9,7 +9,8 @@ export default new Vuex.Store({
     numOfChairs: 50,
     numSponsored: 7,
     names: [],
-    chairSize: 70
+    chairSize: 70,
+    showModal: false
   },
   mutations: {
     updateNumOfChairs(state, num) {
@@ -23,10 +24,14 @@ export default new Vuex.Store({
     },
     add(state) {
       state.numSponsored < state.numOfChairs && state.numSponsored++
+      state.showModal = true
     },
     remove(state) {
       state.numSponsored > 0 && state.numSponsored--
     },
+    closeModal(state) {
+      state.showModal = false
+    }
   },
   plugins: [sharedMutations({ predicate: ['updateNumOfChairs', 'updatechairSize', 'addName', 'add', 'remove'] })],
 });

@@ -7,6 +7,7 @@ import VueRouter from 'vue-router'
 import store from './store';
 
 import '@/assets/css/tailwind.scss'
+import '@/assets/css/animate.css'
 
 Vue.config.productionTip = false
 Vue.component('marquee-text', MarqueeText)

@@ -2,6 +2,9 @@
   <div id="app">
     <banner :num="$store.state.numSponsored" :total="$store.state.numOfChairs" />
     <router-view></router-view>
+    <transition name="fade">
+      <modal v-if="$store.state.showModal"></modal>
+    </transition>
     <carousel :names="$store.state.names" />
     <footer>
       <router-link
@@ -14,10 +17,11 @@
 <script>
 import Banner from "./components/Banner";
 import Carousel from "./components/Carousel";
+import Modal from "./components/Modal";
 
 export default {
   name: "App",
-  components: { Banner, Carousel },
+  components: { Banner, Carousel, Modal },
   mounted() {
     // console.log(this.$route);
   }
