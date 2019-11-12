@@ -22,11 +22,13 @@ export default {
 .banner {
   background-image: url("../assets/banner.png");
   background-size: cover;
-  @apply flex py-12 px-10 text-gray-300 font-extrabold text-center;
+  @apply flex py-2 px-10 text-gray-300 font-extrabold text-center;
 
   .logo {
-    height: 320px;
+    height: 250px;
     margin-bottom: -100px;
+    position: relative;
+    top: 30px;
     z-index: 10;
   }
   .title {

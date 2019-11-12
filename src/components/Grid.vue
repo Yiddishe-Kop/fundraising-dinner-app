@@ -20,6 +20,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   flex-flow: column wrap;
-  padding: 8% 9% 10% 16%;
+  // padding: 8% 9% 10% 16%;
+  padding: 5% 9% 7% 13%; // Full HD
 }
 </style>
