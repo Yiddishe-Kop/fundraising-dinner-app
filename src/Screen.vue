@@ -38,8 +38,10 @@ export default {
   mounted() {
     setTimeout(() => {
       let shulWidth = this.$refs.shul.offsetWidth;
+      let shulHeight = this.$refs.shul.offsetHeight;
       this.gridStyle = {
-        width: `${shulWidth}px`
+        width: `${shulWidth}px`,
+        height: `${shulHeight}px`
       };
     }, 1000);
   }

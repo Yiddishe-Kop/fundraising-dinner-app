@@ -5,80 +5,28 @@
       <div class="total">of ₪{{$store.state.targetAmount}}</div>
       <span class="percent">{{$store.getters.percentageRaised}}%</span>
     </div>
-    <div class="controls">
-      <div class="card">
-        <h2>Control Panel</h2>
-        <div class="form">
-          <div class="row">
-            <label>Target Fundraising Amount (ILS)</label>
-            <input
-              type="number"
-              @change="e => $store.commit('updateTargetAmount', e.target.value)"
-              :value="$store.state.targetAmount"
-              style="width: 100px"
-            />
+    <controls />
+    <panel title="Donors List">
+      <ul>
+        <li v-for="(name, i) in $store.state.names" :key="name + i">
+          <div>
+            <span class="text-xs text-gray-500">{{i + 1}}</span>
+            <span class="ml-2">{{name}}</span>
           </div>
-          <div class="row">
-            <label>Number of chairs</label>
-            <input
-              type="number"
-              @change="e => $store.commit('updateNumOfChairs', e.target.value)"
-              :value="$store.state.numOfChairs"
-              style="width: 60px"
-            />
-          </div>
-          <div class="row">
-            <label>Chair Size</label>
-            <input
-              type="number"
-              @change="e => $store.commit('updatechairSize', e.target.value)"
-              :value="$store.state.chairSize"
-              style="width: 60px"
-            />
-          </div>
-          <div class="row">
-            <label>Add a Name</label>
-            <input
-              type="text"
-              @keyup.enter="e => addName(e.target.value)"
-              v-model="name"
-              placeholder="Name"
-            />
-          </div>
-          <div class="row">
-            <label>Add Donation</label>
-            <input
-              type="number"
-              @keyup.enter="e => addDonation(e.target.value)"
-              v-model="donation"
-              placeholder="Amount"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+          <button @click="$store.commit('removeName', i)">-</button>
+        </li>
+      </ul>
+    </panel>
   </main>
 </template>
 
 <script>
+import Controls from "./components/Controls";
+import Panel from "./components/Panel";
+
 export default {
   name: "Admin",
-  data() {
-    return {
-      name: "",
-      donation: ""
-    };
-  },
-  methods: {
-    addName(name) {
-      this.$store.commit("addName", name);
-      this.name = "";
-    },
-    addDonation(num) {
-      this.$store.commit("addDonation", num);
-      this.donation = "";
-    }
-  }
+  components: { Controls, Panel }
 };
 </script>
 
@@ -95,25 +43,19 @@ export default {
     @apply px-2 font-bold bg-green-200 text-green-700 rounded mt-2 inline-block;
   }
 }
-.controls {
-  padding: 8px;
-  height: 100%;
-  .card {
-    max-width: 500px;
-    @apply m-10 mt-16 mx-auto p-5 rounded bg-gray-100 shadow;
-    .form {
-      @apply p-4;
-      .row {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        @apply mb-5;
-        label {
-          flex: 1 0 200px;
-          @apply text-left;
-        }
-      }
+
+li {
+  color: var(--dark);
+  user-select: none;
+  @apply flex justify-between align-baseline bg-gray-300 font-bold text-left py-1 px-3 mb-1 rounded;
+  button {
+    @apply bg-red-300 text-gray-100 font-bold px-3 rounded-full;
+    &:hover {
+      @apply bg-red-700;
     }
+  }
+  &:hover {
+    transform: scale(1.05);
   }
 }
 </style>

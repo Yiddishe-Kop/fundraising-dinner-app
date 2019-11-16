@@ -22,5 +22,6 @@ export default {
   flex-flow: column wrap;
   // padding: 8% 9% 10% 16%;
   padding: 5% 9% 7% 13%; // Full HD
+  padding: 8% 8% 8% 16%;
 }
 </style>

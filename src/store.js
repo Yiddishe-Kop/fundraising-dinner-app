@@ -30,6 +30,15 @@ export default new Vuex.Store({
     addName(state, name) {
       state.names = [...state.names, name]
     },
+    removeName(state, i) {
+      let namesCopy = state.names;
+      if (namesCopy.length === 1) {
+        namesCopy = []
+      } else {
+        namesCopy.splice(i, 1)
+      }
+      state.names = namesCopy
+    },
     showModal(state) {
       state.showModal = true
     },
@@ -48,5 +57,5 @@ export default new Vuex.Store({
       return Math.floor(getters.chairsSponsored)
     }
   },
-  plugins: [sharedMutations({ predicate: ['updateTargetAmount', 'addDonation', 'updateNumOfChairs', 'updatechairSize', 'addName', 'showModal'] })],
+  plugins: [sharedMutations({ predicate: ['updateTargetAmount', 'addDonation', 'updateNumOfChairs', 'updatechairSize', 'addName', 'removeName', 'showModal'] })],
 });
