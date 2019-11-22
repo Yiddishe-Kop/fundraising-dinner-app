@@ -59,8 +59,8 @@ export default {
   flex-direction: column;
 }
 
-$padding-top: 6rem;
-$padding: 4rem;
+$padding-top: 2rem;
+$padding: 2rem;
 
 main {
   padding: $padding;
@@ -74,6 +74,7 @@ main {
     left: 4rem;
     right: 4rem;
     height: calc(100% - #{$padding * 1.5} - #{$padding-top});
+    max-width: 95%;
     // width: 100%;
   }
 }

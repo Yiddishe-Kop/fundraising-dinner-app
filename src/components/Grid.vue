@@ -1,6 +1,8 @@
 <template>
   <div class="grid">
-    <slot />
+    <div class="inner">
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -15,13 +17,16 @@ export default {
   margin: auto;
   flex: 2 2;
   height: 100%;
-  overflow: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-flow: column wrap;
-  // padding: 8% 9% 10% 16%;
-  padding: 5% 9% 7% 13%; // Full HD
-  padding: 8% 8% 8% 16%;
+  // padding: 5% 9% 7% 13%;
+  // padding: 8% 8% 8% 16%;
+  padding: 6% 7% 6% 13%; // Full HD
+  .inner {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: column wrap;
+  }
 }
 </style>

@@ -38,7 +38,7 @@ export default {
   user-select: none;
   background-color: var(--brand);
   color: var(--dark);
-  @apply px-5 py-3 text-lg font-bold text-left;
+  @apply px-5 py-3 text-2xl font-bold text-left;
   span.name {
     color: var(--dark);
     background-color: var(--dark);
