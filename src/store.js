@@ -15,6 +15,10 @@ export default new Vuex.Store({
     showModal: false
   },
   mutations: {
+    setState(state, newState) {
+      state.names = newState.names
+      state.amountRaised = newState.amountRaised
+    },
     updateTargetAmount(state, num) {
       state.targetAmount = Number(num)
     },
@@ -55,6 +59,27 @@ export default new Vuex.Store({
     },
     fullChairsSponsored: (state, getters) => {
       return Math.floor(getters.chairsSponsored)
+    },
+    watchAndSaveState: state => { // a hack to always save the state in localStorage
+      console.log(localStorage.getItem('dinnerData'));
+      state.names.length >= 1 && localStorage.setItem('dinnerData', JSON.stringify(state))
+      return state.amountRaised + ' ' + state.names
+    }
+  },
+  actions: {
+    saveState: ({ state }) => {
+      localStorage.setItem('dinnerData', JSON.stringify(state))
+    },
+    retrieveState: ({ commit }) => {
+      console.log(localStorage.getItem('dinnerData'));
+      if (localStorage.getItem('dinnerData')) {
+        let newState = JSON.parse(localStorage.getItem('dinnerData'))
+        commit('setState', newState)
+      }
+    },
+    clearData: () => {
+      localStorage.removeItem('dinnerData')
+      location.reload();
     }
   },
   plugins: [sharedMutations({ predicate: ['updateTargetAmount', 'addDonation', 'updateNumOfChairs', 'updatechairSize', 'addName', 'removeName', 'showModal'] })],

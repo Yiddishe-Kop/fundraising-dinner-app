@@ -32,6 +32,7 @@
       @change="e => donation = e.target.value"
       @enter="e => addDonation(e.target.value)"
     />
+    <button class="clear" @click="$store.dispatch('clearData')">Clear all data</button>
   </panel>
 </template>
 
@@ -62,4 +63,7 @@ export default {
 </script>
 
 <style lang="scss">
+button.clear {
+  @apply text-xs bg-red-600 text-red-100 py-1 px-2 mt-5 rounded;
+}
 </style>

@@ -10,6 +10,7 @@
       <router-link
         :to="$route.path == '/' ? '/admin' : '/'"
       >{{$route.path == '/' ? 'Control Panel' : 'Home'}}</router-link>
+      <input type="hidden" name="saveData" :value="$store.getters.watchAndSaveState" />
     </footer>
   </div>
 </template>
@@ -24,6 +25,7 @@ export default {
   components: { Banner, Carousel, Modal },
   mounted() {
     // console.log(this.$route);
+    this.$store.dispatch("retrieveState");
   }
 };
 </script>
